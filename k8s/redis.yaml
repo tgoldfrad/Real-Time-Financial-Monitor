@@ -1,0 +1,58 @@
+# Redis deployment for SignalR backplane.
+# NOTE: For production use a managed Redis service (e.g. AWS ElastiCache,
+# Azure Cache for Redis, GCP Memorystore) with persistence + replication.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: financial-monitor
+    component: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: financial-monitor
+      component: redis
+  template:
+    metadata:
+      labels:
+        app: financial-monitor
+        component: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          ports:
+            - containerPort: 6379
+              protocol: TCP
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          readinessProbe:
+            exec:
+              command: ["redis-cli", "ping"]
+            initialDelaySeconds: 3
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  labels:
+    app: financial-monitor
+    component: redis
+spec:
+  type: ClusterIP
+  selector:
+    app: financial-monitor
+    component: redis
+  ports:
+    - name: redis
+      protocol: TCP
+      port: 6379
+      targetPort: 6379

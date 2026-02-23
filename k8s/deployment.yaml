@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: financial-monitor-api
+  labels:
+    app: financial-monitor
+    component: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: financial-monitor
+      component: api
+  template:
+    metadata:
+      labels:
+        app: financial-monitor
+        component: api
+    spec:
+      containers:
+        - name: api
+          image: financial-monitor-api:latest
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_URLS
+              value: "http://+:5000"
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: REDIS_CONNECTION
+              value: "redis-service:6379"
+            - name: CORS_ORIGINS
+              value: "http://financial-monitor-frontend"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 3
+            failureThreshold: 3

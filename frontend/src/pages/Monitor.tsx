@@ -7,7 +7,7 @@ import TransactionTable from '../components/TransactionTable';
 import styles from './Monitor.module.css';
 
 export default function Monitor() {
-  const { transactions, connectionStatus } = useTransactions();
+  const { transactions, connectionStatus, newTransactionIds } = useTransactions();
   const [filter, setFilter] = useState<TransactionStatus | 'All'>('All');
 
   const filtered = useMemo(() => {
@@ -40,7 +40,7 @@ export default function Monitor() {
         <span className={styles.total}>{filtered.length} transactions</span>
       </div>
 
-      <TransactionTable transactions={filtered} />
+      <TransactionTable transactions={filtered} newTransactionIds={newTransactionIds} />
     </div>
   );
 }

@@ -12,6 +12,16 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    transition: none;
+  }
+  .connecting .dot {
+    animation: none;
+  }
 }
 
 .connected {

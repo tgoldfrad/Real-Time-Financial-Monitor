@@ -27,3 +27,11 @@ C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\obj\Debug\net9.0\Financi
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\obj\Debug\net9.0\FinancialMonitor.Api.genruntimeconfig.cache
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\obj\Debug\net9.0\ref\FinancialMonitor.Api.dll
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\obj\Debug\net9.0\FinancialMonitor.Api.sourcelink.json
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\bin\Debug\net9.0\MessagePack.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\bin\Debug\net9.0\MessagePack.Annotations.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\bin\Debug\net9.0\Microsoft.AspNetCore.SignalR.StackExchangeRedis.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\bin\Debug\net9.0\Microsoft.NET.StringTools.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\bin\Debug\net9.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\bin\Debug\net9.0\StackExchange.Redis.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\obj\Debug\net9.0\FinancialMonitor.Api.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\obj\Debug\net9.0\Financia.5D393337.Up2Date

@@ -417,3 +417,9 @@ C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\bin\Debug\net9.0\M
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\bin\Debug\net9.0\Microsoft.AspNetCore.TestHost.dll
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\bin\Debug\net9.0\Moq.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\bin\Debug\net9.0\MessagePack.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\bin\Debug\net9.0\MessagePack.Annotations.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\bin\Debug\net9.0\Microsoft.AspNetCore.SignalR.StackExchangeRedis.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\bin\Debug\net9.0\Microsoft.NET.StringTools.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\bin\Debug\net9.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\bin\Debug\net9.0\StackExchange.Redis.dll

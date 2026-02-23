@@ -1,0 +1,37 @@
+services:
+  # ── Redis (backplane for SignalR) ───────────────────
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # ── Backend (.NET 9 API) ────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+      - ASPNETCORE_ENVIRONMENT=Production
+      - REDIS_CONNECTION=redis:6379
+      - CORS_ORIGINS=http://localhost,http://localhost:80,http://localhost:5173
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # ── Frontend (Nginx + Vite build) ──────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend

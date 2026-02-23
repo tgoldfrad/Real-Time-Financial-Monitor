@@ -1,0 +1,12 @@
+bin/
+obj/
+*.Tests/
+**/*.user
+**/*.vs
+**/node_modules
+.git
+.gitignore
+README.md
+docs/
+global.json
+*.sln

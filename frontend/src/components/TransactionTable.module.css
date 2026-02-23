@@ -56,3 +56,38 @@
   color: #94a3b8;
   font-size: 0.95rem;
 }
+
+/* ── New row entry animation ──────────────────────── */
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes highlight {
+  0% {
+    background-color: #fef9c3;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.newRow {
+  animation:
+    slideIn 0.4s ease-out,
+    highlight 2s ease-out;
+}
+
+/* Respect accessibility: disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .newRow {
+    animation: none;
+  }
+}
