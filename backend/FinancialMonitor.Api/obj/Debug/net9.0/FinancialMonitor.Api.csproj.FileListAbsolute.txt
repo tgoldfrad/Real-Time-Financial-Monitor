@@ -26,3 +26,4 @@ C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\obj\Debug\net9.0\refint\
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\obj\Debug\net9.0\FinancialMonitor.Api.pdb
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\obj\Debug\net9.0\FinancialMonitor.Api.genruntimeconfig.cache
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\obj\Debug\net9.0\ref\FinancialMonitor.Api.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api\obj\Debug\net9.0\FinancialMonitor.Api.sourcelink.json

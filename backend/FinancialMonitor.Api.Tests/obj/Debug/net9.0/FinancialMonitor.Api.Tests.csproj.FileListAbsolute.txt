@@ -106,3 +106,4 @@ C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\obj\Debug\net9.0\r
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\obj\Debug\net9.0\FinancialMonitor.Api.Tests.pdb
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\obj\Debug\net9.0\FinancialMonitor.Api.Tests.genruntimeconfig.cache
 C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\obj\Debug\net9.0\ref\FinancialMonitor.Api.Tests.dll
+C:\Users\User\Desktop\task\backend\FinancialMonitor.Api.Tests\obj\Debug\net9.0\FinancialMonitor.Api.Tests.sourcelink.json
