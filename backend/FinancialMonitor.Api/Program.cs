@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using FinancialMonitor.Api.Hubs;
+using FinancialMonitor.Api.Services;
 using FinancialMonitor.Api.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Storage — singleton so data lives for the app's lifetime
 builder.Services.AddSingleton<ITransactionStore, InMemoryTransactionStore>();
+
+// Business logic — scoped (one per request)
+builder.Services.AddScoped<ITransactionService, TransactionService>();
 
 // SignalR for real-time broadcasting
 builder.Services.AddSignalR()
@@ -46,3 +50,6 @@ app.MapControllers();
 app.MapHub<TransactionHub>("/hubs/transactions");
 
 app.Run();
+
+// Make the auto-generated Program class accessible for integration tests
+public partial class Program { }
