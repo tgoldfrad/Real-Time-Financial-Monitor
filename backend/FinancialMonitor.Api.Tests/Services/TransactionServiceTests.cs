@@ -125,6 +125,49 @@ public class TransactionServiceTests
             .WithMessage("*already exists*");
     }
 
+    // ── Validation ───────────────────────────────────────
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    [InlineData(-999.99)]
+    public async Task ProcessTransaction_InvalidAmount_ThrowsArgumentException(decimal amount)
+    {
+        var dto = CreateValidDto(amount: amount);
+
+        var act = () => _service.ProcessTransactionAsync(dto);
+
+        await act.Should().ThrowAsync<ArgumentException>()
+            .WithMessage("*Amount must be greater than zero*");
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("AB")]
+    [InlineData("ABCD")]
+    public async Task ProcessTransaction_InvalidCurrencyLength_ThrowsArgumentException(string currency)
+    {
+        var dto = CreateValidDto();
+        dto.Currency = currency;
+
+        var act = () => _service.ProcessTransactionAsync(dto);
+
+        await act.Should().ThrowAsync<ArgumentException>()
+            .WithMessage("*Currency must be a 3-letter ISO code*");
+    }
+
+    [Fact]
+    public async Task ProcessTransaction_UnsupportedCurrency_ThrowsArgumentException()
+    {
+        var dto = CreateValidDto();
+        dto.Currency = "XYZ";
+
+        var act = () => _service.ProcessTransactionAsync(dto);
+
+        await act.Should().ThrowAsync<ArgumentException>()
+            .WithMessage("*not supported*");
+    }
+
     // ── Concurrency ──────────────────────────────────────
 
     [Fact]

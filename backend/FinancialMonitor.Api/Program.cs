@@ -1,9 +1,13 @@
 using System.Text.Json.Serialization;
 using FinancialMonitor.Api.Hubs;
+using FinancialMonitor.Api.Middleware;
 using FinancialMonitor.Api.Services;
 using FinancialMonitor.Api.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// ── Kestrel ──────────────────────────────────────────────
+builder.WebHost.UseUrls("http://localhost:5000");
 
 // ── Services ────────────────────────────────────────────
 
@@ -44,6 +48,7 @@ var app = builder.Build();
 
 // ── Middleware ───────────────────────────────────────────
 
+app.UseMiddleware<GlobalErrorHandlingMiddleware>();
 app.UseCors("AllowFrontend");
 
 app.MapControllers();

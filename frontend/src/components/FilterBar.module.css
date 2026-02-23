@@ -1,0 +1,45 @@
+.bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #475569;
+  transition: all 0.15s;
+}
+
+.btn:hover {
+  background: #f1f5f9;
+}
+
+.active {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
+
+.active:hover {
+  background: #2563eb;
+}
+
+.count {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.active .count {
+  background: rgba(255, 255, 255, 0.25);
+}

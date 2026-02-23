@@ -19,10 +19,28 @@ public sealed class TransactionService : ITransactionService
         _hubContext = hubContext;
     }
 
+    private static readonly HashSet<string> ValidCurrencies = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "USD", "EUR", "ILS", "GBP", "JPY", "CHF", "CAD", "AUD"
+    };
+
     /// <inheritdoc />
     public async Task<Transaction> ProcessTransactionAsync(TransactionDto dto)
     {
         ArgumentNullException.ThrowIfNull(dto);
+
+        // ── Service-level validation ────────────────────
+        if (dto.Amount <= 0)
+            throw new ArgumentException("Amount must be greater than zero.", nameof(dto));
+
+        if (string.IsNullOrWhiteSpace(dto.Currency) || dto.Currency.Length != 3)
+            throw new ArgumentException("Currency must be a 3-letter ISO code.", nameof(dto));
+
+        if (!ValidCurrencies.Contains(dto.Currency))
+            throw new ArgumentException($"Currency '{dto.Currency}' is not supported.", nameof(dto));
+
+        if (!Enum.IsDefined(dto.Status))
+            throw new ArgumentException($"Invalid transaction status: '{dto.Status}'.", nameof(dto));
 
         var transaction = dto.ToDomain();
 
