@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "t4b2RJRXOd9f8UJxhtIUID1ZpiyC0PYRR+w+KZARQQY=",
+  "Source": "FinancialMonitor.Api",
+  "BasePath": "_content/FinancialMonitor.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
