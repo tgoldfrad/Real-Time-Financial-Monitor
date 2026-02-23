@@ -1,9 +1,48 @@
+using System.Text.Json.Serialization;
+using FinancialMonitor.Api.Hubs;
+using FinancialMonitor.Api.Storage;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Services will be registered here in Step 3+
+// ── Services ────────────────────────────────────────────
+
+// Storage — singleton so data lives for the app's lifetime
+builder.Services.AddSingleton<ITransactionStore, InMemoryTransactionStore>();
+
+// SignalR for real-time broadcasting
+builder.Services.AddSignalR()
+    .AddJsonProtocol(options =>
+    {
+        options.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
+// Controllers + JSON options
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+    });
+
+// CORS — allow the React dev server
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173", "http://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); // required for SignalR
+    });
+});
 
 var app = builder.Build();
 
-// Middleware & endpoints will be configured here in Step 4+
+// ── Middleware ───────────────────────────────────────────
+
+app.UseCors("AllowFrontend");
+
+app.MapControllers();
+app.MapHub<TransactionHub>("/hubs/transactions");
 
 app.Run();
