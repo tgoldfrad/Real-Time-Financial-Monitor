@@ -88,6 +88,7 @@
   color: #475569;
 }
 .btnSecondary:hover { background: #e2e8f0; }
+.btnSecondary:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .btnAccent {
   background: #10b981;

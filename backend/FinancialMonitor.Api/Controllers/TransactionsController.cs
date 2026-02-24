@@ -27,16 +27,9 @@ public class TransactionsController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        try
-        {
-            var transaction = await _service.ProcessTransactionAsync(dto);
-            var result = TransactionDto.FromDomain(transaction);
-            return CreatedAtAction(nameof(GetById), new { id = transaction.TransactionId }, result);
-        }
-        catch (InvalidOperationException ex) when (ex.Message.Contains("already exists"))
-        {
-            return Conflict(new { error = ex.Message });
-        }
+        var transaction = await _service.ProcessTransactionAsync(dto);
+        var result = TransactionDto.FromDomain(transaction);
+        return CreatedAtAction(nameof(GetById), new { id = transaction.TransactionId }, result);
     }
 
     /// <summary>
