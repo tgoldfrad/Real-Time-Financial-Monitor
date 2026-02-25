@@ -57,7 +57,6 @@
   font-size: 0.95rem;
 }
 
-/* ── New row entry animation ──────────────────────── */
 
 @keyframes slideIn {
   from {
@@ -85,7 +84,6 @@
     highlight 2s ease-out;
 }
 
-/* Respect accessibility: disable animations for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .newRow {
     animation: none;

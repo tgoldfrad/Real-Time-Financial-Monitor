@@ -36,7 +36,6 @@ public class TransactionServiceTests
         Timestamp = DateTimeOffset.UtcNow
     };
 
-    // ── ProcessTransaction ───────────────────────────────
 
     [Fact]
     public async Task ProcessTransaction_ValidDto_StoresTransaction()
@@ -125,7 +124,6 @@ public class TransactionServiceTests
             .WithMessage("*already exists*");
     }
 
-    // ── Validation ───────────────────────────────────────
 
     [Theory]
     [InlineData(0)]
@@ -168,7 +166,6 @@ public class TransactionServiceTests
             .WithMessage("*not supported*");
     }
 
-    // ── Concurrency ──────────────────────────────────────
 
     [Fact]
     public async Task ConcurrentProcesses_AllUniqueIds_AllSucceed()

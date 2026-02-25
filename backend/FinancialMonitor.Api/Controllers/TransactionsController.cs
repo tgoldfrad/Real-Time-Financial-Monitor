@@ -18,9 +18,6 @@ public class TransactionsController : ControllerBase
         _store = store;
     }
 
-    /// <summary>
-    /// POST /api/transactions — ingest a new transaction.
-    /// </summary>
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] TransactionDto dto)
     {
@@ -32,9 +29,6 @@ public class TransactionsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = transaction.TransactionId }, result);
     }
 
-    /// <summary>
-    /// GET /api/transactions — returns all stored transactions (newest first).
-    /// </summary>
     [HttpGet]
     public IActionResult GetAll()
     {
@@ -45,9 +39,6 @@ public class TransactionsController : ControllerBase
         return Ok(transactions);
     }
 
-    /// <summary>
-    /// GET /api/transactions/{id} — returns a single transaction by ID.
-    /// </summary>
     [HttpGet("{id}")]
     public IActionResult GetById(string id)
     {

@@ -5,10 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace FinancialMonitor.Api.Services;
 
-/// <summary>
-/// Processes incoming transactions: maps DTO → domain, stores, and broadcasts via SignalR.
-/// </summary>
-public sealed class TransactionService : ITransactionService
+public class TransactionService : ITransactionService
 {
     private readonly ITransactionStore _store;
     private readonly IHubContext<TransactionHub> _hubContext;
@@ -24,12 +21,10 @@ public sealed class TransactionService : ITransactionService
         "USD", "EUR", "ILS", "GBP", "JPY", "CHF", "CAD", "AUD"
     };
 
-    /// <inheritdoc />
     public async Task<Transaction> ProcessTransactionAsync(TransactionDto dto)
     {
         ArgumentNullException.ThrowIfNull(dto);
 
-        // ── Service-level validation ────────────────────
         if (dto.Amount <= 0)
             throw new ArgumentException("Amount must be greater than zero.", nameof(dto));
 
@@ -50,7 +45,6 @@ public sealed class TransactionService : ITransactionService
                 $"Transaction with ID '{transaction.TransactionId}' already exists.");
         }
 
-        // Broadcast to all connected SignalR clients
         await _hubContext.Clients.All.SendAsync("ReceiveTransaction", TransactionDto.FromDomain(transaction));
 
         return transaction;

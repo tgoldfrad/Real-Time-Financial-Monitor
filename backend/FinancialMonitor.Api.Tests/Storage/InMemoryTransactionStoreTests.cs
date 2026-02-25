@@ -17,7 +17,6 @@ public class InMemoryTransactionStoreTests
         Timestamp = timestamp ?? DateTimeOffset.UtcNow
     };
 
-    // ── Add ──────────────────────────────────────────────
 
     [Fact]
     public void Add_ValidTransaction_ReturnsTrue()
@@ -49,7 +48,6 @@ public class InMemoryTransactionStoreTests
         act.Should().Throw<ArgumentNullException>();
     }
 
-    // ── GetAll ───────────────────────────────────────────
 
     [Fact]
     public void GetAll_EmptyStore_ReturnsEmptyList()
@@ -88,7 +86,6 @@ public class InMemoryTransactionStoreTests
         result.Last().TransactionId.Should().Be(older.TransactionId);
     }
 
-    // ── GetById ──────────────────────────────────────────
 
     [Fact]
     public void GetById_ExistingId_ReturnsTransaction()
@@ -111,7 +108,6 @@ public class InMemoryTransactionStoreTests
         result.Should().BeNull();
     }
 
-    // ── Concurrency ──────────────────────────────────────
 
     [Fact]
     public async Task ConcurrentAdds_AllUniqueIds_AllSucceed()
@@ -145,7 +141,6 @@ public class InMemoryTransactionStoreTests
     [Fact]
     public async Task ConcurrentReadsAndWrites_NoExceptions()
     {
-        // Mix concurrent adds and reads to verify thread safety
         var cts = new CancellationTokenSource(TimeSpan.FromSeconds(3));
         var writeTask = Task.Run(async () =>
         {

@@ -2,11 +2,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine AS build
 WORKDIR /src
 
-# Copy csproj files and restore (layer cache)
 COPY FinancialMonitor.Api/FinancialMonitor.Api.csproj FinancialMonitor.Api/
 RUN dotnet restore FinancialMonitor.Api/FinancialMonitor.Api.csproj
 
-# Copy everything else and publish
 COPY FinancialMonitor.Api/ FinancialMonitor.Api/
 RUN dotnet publish FinancialMonitor.Api/FinancialMonitor.Api.csproj \
     -c Release \

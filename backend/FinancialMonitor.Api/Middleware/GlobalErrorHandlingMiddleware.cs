@@ -1,10 +1,6 @@
 namespace FinancialMonitor.Api.Middleware;
 
-/// <summary>
-/// Global error handling middleware. Catches unhandled exceptions and returns
-/// a consistent JSON error response instead of leaking stack traces.
-/// </summary>
-public sealed class GlobalErrorHandlingMiddleware
+public class GlobalErrorHandlingMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly ILogger<GlobalErrorHandlingMiddleware> _logger;

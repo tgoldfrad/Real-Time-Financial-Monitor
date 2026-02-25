@@ -24,7 +24,6 @@ public class TransactionsControllerTests : IClassFixture<WebApplicationFactory<P
         Timestamp = DateTimeOffset.UtcNow
     };
 
-    // ── POST /api/transactions ───────────────────────────
 
     [Fact]
     public async Task Post_ValidPayload_Returns201()
@@ -93,7 +92,6 @@ public class TransactionsControllerTests : IClassFixture<WebApplicationFactory<P
         response.StatusCode.Should().Be(HttpStatusCode.Conflict);
     }
 
-    // ── GET /api/transactions ────────────────────────────
 
     [Fact]
     public async Task Get_ReturnsOkWithList()
@@ -117,7 +115,6 @@ public class TransactionsControllerTests : IClassFixture<WebApplicationFactory<P
         result.Should().Contain(t => t.TransactionId == dto.TransactionId);
     }
 
-    // ── Concurrent POSTs ─────────────────────────────────
 
     [Fact]
     public async Task ConcurrentPosts_AllValid_AllReturn201()

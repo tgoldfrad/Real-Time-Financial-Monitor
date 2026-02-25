@@ -5,13 +5,6 @@ import type { Transaction } from '../types/transaction';
 
 const ANIMATION_DURATION_MS = 2000;
 
-/**
- * Hook that manages the live transaction feed.
- * - Fetches initial transactions via GET.
- * - Connects to SignalR and prepends new transactions in real-time.
- * - Batches rapid updates via requestAnimationFrame to avoid freezing the UI.
- * - Tracks which transaction IDs are "new" (for entry animations).
- */
 export function useTransactions() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [connectionStatus, setConnectionStatus] = useState<'connecting' | 'connected' | 'disconnected'>('disconnected');
@@ -20,7 +13,6 @@ export function useTransactions() {
   const rafRef = useRef<number | null>(null);
   const timersRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
 
-  // Remove an ID from the "new" set after the animation duration
   const scheduleRemoval = useCallback((id: string) => {
     const timer = setTimeout(() => {
       setNewTransactionIds(prev => {
@@ -33,7 +25,6 @@ export function useTransactions() {
     timersRef.current.set(id, timer);
   }, []);
 
-  // Flush pending transactions into state in one batch
   const flush = useCallback(() => {
     rafRef.current = null;
     if (pendingRef.current.length === 0) return;
@@ -41,7 +32,6 @@ export function useTransactions() {
     pendingRef.current = [];
     setTransactions(prev => [...batch, ...prev]);
 
-    // Mark these IDs as new and schedule their removal
     const ids = batch.map(tx => tx.transactionId);
     setNewTransactionIds(prev => {
       const next = new Set(prev);
@@ -51,7 +41,6 @@ export function useTransactions() {
     for (const id of ids) scheduleRemoval(id);
   }, [scheduleRemoval]);
 
-  // Queue a transaction and schedule a flush on next animation frame
   const enqueue = useCallback((tx: Transaction) => {
     pendingRef.current.push(tx);
     if (rafRef.current === null) {
@@ -63,7 +52,6 @@ export function useTransactions() {
     let mounted = true;
 
     async function init() {
-      // 1. Fetch existing transactions
       try {
         const res = await fetchTransactions();
         if (res.ok && mounted) {
@@ -74,12 +62,10 @@ export function useTransactions() {
         console.warn('Failed to fetch transactions:', err);
       }
 
-      // 2. Connect to SignalR
       setConnectionStatus('connecting');
       try {
         const conn = getConnection();
 
-        // Register handlers BEFORE starting to avoid missing messages
         conn.on('ReceiveTransaction', (tx: Transaction) => {
           if (mounted) enqueue(tx);
         });
@@ -100,7 +86,6 @@ export function useTransactions() {
     return () => {
       mounted = false;
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-      // Clear all pending animation timers
       for (const timer of timersRef.current.values()) clearTimeout(timer);
       timersRef.current.clear();
       const conn = getConnection();

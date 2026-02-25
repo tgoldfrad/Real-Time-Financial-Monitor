@@ -2,11 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace FinancialMonitor.Api.Hubs;
 
-/// <summary>
-/// SignalR hub for broadcasting transaction updates to connected clients.
-/// Client method: "ReceiveTransaction" — receives a single transaction object.
-/// </summary>
-public sealed class TransactionHub : Hub
+public class TransactionHub : Hub
 {
     private readonly ILogger<TransactionHub> _logger;
 
