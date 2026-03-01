@@ -3,7 +3,7 @@
 A full-stack MVP for real-time financial transaction monitoring, built with
 **.NET 9** (backend) and **React + TypeScript** (frontend).
 
-Transactions are ingested via REST API, stored in-memory, and instantly
+Transactions are ingested via REST API, stored in **SQLite**, and instantly
 broadcast to all connected dashboards via **SignalR**.
 
 ---
@@ -17,7 +17,7 @@ broadcast to all connected dashboards via **SignalR**.
 │  (TypeScript)  │ ◀──── SignalR WebSocket ──────────── │  │ TransactionHub │  │
 │                │       "ReceiveTransaction"            │  └────────────────┘  │
 └────────────────┘                                      │  ┌────────────────┝  │
-   localhost:5173                                       │  │  InMemoryStore │  │
+   localhost:5173                                       │  │ SQLite (EF9)  │  │
                                                         │  └────────────────┘  │
                                                         └──────────┬───────────┘
                                                                    │ (optional)
@@ -33,10 +33,10 @@ broadcast to all connected dashboards via **SignalR**.
 |-------|-----------|
 | Framework | ASP.NET Core 9 (Minimal Hosting) |
 | Real-time | SignalR with optional Redis backplane |
-| Storage | `ConcurrentDictionary` (in-memory, Singleton) |
-| Validation | Service-level + DataAnnotations on DTO |
+| Storage | SQLite via EF Core 9 (WAL mode, Scoped) |
+| Validation | FluentValidation |
 | Error handling | Global middleware → consistent JSON errors |
-| Testing | xUnit + Moq + FluentAssertions (35 tests) |
+| Testing | NUnit + Moq + FluentAssertions (15 tests) |
 
 ### Frontend
 
@@ -46,6 +46,7 @@ broadcast to all connected dashboards via **SignalR**.
 | Bundler | Vite 7 |
 | Routing | react-router-dom (2 routes) |
 | Real-time | @microsoft/signalr client |
+| State Management | Redux Toolkit (combineSlices) |
 | Styling | CSS Modules |
 | Performance | requestAnimationFrame batching for rapid updates |
 
@@ -82,7 +83,7 @@ npm run dev
 ```bash
 cd backend
 dotnet test
-# 35 tests: Storage (11), Service (11), Controller (9), Validation (4)
+# 15 tests: Storage (4), Concurrency (3), Service (4), Validation (4)
 ```
 
 ---
@@ -95,13 +96,7 @@ docker compose up --build
 
 # Backend  → http://localhost:5000
 # Frontend → http://localhost:80
-# Redis    → localhost:6379 (internal)
 ```
-
-The `docker-compose.yml` wires up three services:
-- **backend** — .NET 9 API with Redis backplane enabled
-- **frontend** — Nginx serving the Vite build, proxying API/SignalR to backend
-- **redis** — Redis 7 Alpine for SignalR pub/sub
 
 ---
 
@@ -148,40 +143,6 @@ Example manifests are provided in the `k8s/` directory:
 kubectl apply -f k8s/
 ```
 
-- `deployment.yaml` — 3 replicas with health probes and resource limits
+- `deployment.yaml` — 1 replica with health probes and resource limits
 - `service.yaml` — ClusterIP Service for internal load balancing
 - `redis.yaml` — Redis pod + service for the backplane
-
----
-
-## Project Structure
-
-```
-task/
-├── README.md
-├── docker-compose.yml
-├── k8s/
-│   ├── deployment.yaml
-│   ├── service.yaml
-│   └── redis.yaml
-├── backend/
-│   ├── FinancialMonitor.sln
-│   ├── Dockerfile
-│   ├── docs/adr/001-distributed-signalr.md
-│   └── FinancialMonitor.Api/
-│       ├── Controllers/
-│       ├── Hubs/
-│       ├── Middleware/
-│       ├── Models/
-│       ├── Services/
-│       └── Storage/
-└── frontend/
-    ├── Dockerfile
-    ├── nginx.conf
-    └── src/
-        ├── components/
-        ├── hooks/
-        ├── pages/
-        ├── services/
-        └── types/
-```

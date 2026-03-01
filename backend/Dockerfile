@@ -15,14 +15,16 @@ RUN dotnet publish FinancialMonitor.Api/FinancialMonitor.Api.csproj \
 FROM mcr.microsoft.com/dotnet/aspnet:9.0-alpine AS runtime
 WORKDIR /app
 
-# Create non-root user for security
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
+# Create non-root user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup \
+    && chown -R appuser:appgroup /app
 
 COPY --from=build /app/publish .
 
 ENV ASPNETCORE_URLS=http://+:5000
 EXPOSE 5000
+
+USER appuser
 
 HEALTHCHECK --interval=15s --timeout=3s --start-period=5s --retries=3 \
     CMD wget -qO- http://localhost:5000/health || exit 1

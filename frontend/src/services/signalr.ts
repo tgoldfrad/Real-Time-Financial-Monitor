@@ -1,6 +1,6 @@
 import { HubConnection, HubConnectionBuilder, LogLevel, HubConnectionState } from '@microsoft/signalr';
 
-const HUB_URL = 'http://localhost:5000/hubs/transactions';
+const HUB_URL = '/hubs/transactions';
 
 let connection: HubConnection | null = null;
 

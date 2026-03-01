@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
 import { useTransactions } from '../hooks/useTransactions';
 import type { TransactionStatus } from '../types/transaction';
-import ConnectionIndicator from '../components/ConnectionIndicator';
-import FilterBar from '../components/FilterBar';
-import TransactionTable from '../components/TransactionTable';
+import ConnectionIndicator from '../components/ConnectionIndicator/ConnectionIndicator';
+import FilterBar from '../components/FilterBar/FilterBar';
+import TransactionTable from '../components/TransactionTable/TransactionTable';
 import styles from './Monitor.module.css';
 
 export default function Monitor() {
-  const { transactions, connectionStatus, newTransactionIds } = useTransactions();
+  const { transactions, connectionStatus, newTransactionIds, loading, error } = useTransactions();
   const [filter, setFilter] = useState<TransactionStatus | 'All'>('All');
 
   const filtered = useMemo(() => {
@@ -41,6 +41,14 @@ export default function Monitor() {
       </div>
 
       <TransactionTable transactions={filtered} newTransactionIds={newTransactionIds} />
+
+      {loading && transactions.length === 0 && (
+        <p className={styles.loading}>Loading transactions...</p>
+      )}
+
+      {error && (
+        <p className={styles.error}>Failed to load transactions: {error}</p>
+      )}
     </div>
   );
 }

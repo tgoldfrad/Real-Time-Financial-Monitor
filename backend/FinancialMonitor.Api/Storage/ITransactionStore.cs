@@ -4,9 +4,9 @@ namespace FinancialMonitor.Api.Storage;
 
 public interface ITransactionStore
 {
-    bool Add(Transaction transaction);
+    Task<bool> AddAsync(Transaction transaction);
 
-    IReadOnlyList<Transaction> GetAll();
+    Task<IReadOnlyList<Transaction>> GetAllAsync();
 
-    Transaction? GetById(string transactionId);
+    Task<Transaction?> GetByIdAsync(string transactionId);
 }

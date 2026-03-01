@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api.Tests\\FinancialMonitor.Api.Tests.csproj": {}
+    "C:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api.Tests\\FinancialMonitor.Api.Tests.csproj": {}
   },
   "projects": {
-    "c:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api.Tests\\FinancialMonitor.Api.Tests.csproj": {
+    "C:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api.Tests\\FinancialMonitor.Api.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api.Tests\\FinancialMonitor.Api.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api.Tests\\FinancialMonitor.Api.Tests.csproj",
         "projectName": "FinancialMonitor.Api.Tests",
-        "projectPath": "c:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api.Tests\\FinancialMonitor.Api.Tests.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api.Tests\\FinancialMonitor.Api.Tests.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api.Tests\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "c:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\FinancialMonitor.Api.csproj": {
-                "projectPath": "c:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\FinancialMonitor.Api.csproj"
+              "C:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\FinancialMonitor.Api.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\FinancialMonitor.Api.csproj"
               }
             }
           }
@@ -58,7 +58,7 @@
               "target": "Package",
               "version": "[8.8.0, )"
             },
-            "Microsoft.AspNetCore.Mvc.Testing": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[9.0.2, )"
             },
@@ -70,17 +70,17 @@
               "target": "Package",
               "version": "[4.20.72, )"
             },
+            "NUnit": {
+              "target": "Package",
+              "version": "[4.3.2, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[6.0.2, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.9.2, )"
-            },
-            "xunit.runner.visualstudio": {
-              "target": "Package",
-              "version": "[2.8.2, )"
             }
           },
           "imports": [
@@ -103,14 +103,14 @@
         }
       }
     },
-    "c:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\FinancialMonitor.Api.csproj": {
+    "C:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\FinancialMonitor.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\FinancialMonitor.Api.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\FinancialMonitor.Api.csproj",
         "projectName": "FinancialMonitor.Api",
-        "projectPath": "c:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\FinancialMonitor.Api.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\FinancialMonitor.Api.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\task\\backend\\FinancialMonitor.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -149,7 +149,25 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.11.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.11.0, )"
+            },
             "Microsoft.AspNetCore.SignalR.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[9.0.2, )"
             }

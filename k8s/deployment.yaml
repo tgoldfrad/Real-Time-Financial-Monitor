@@ -6,7 +6,7 @@ metadata:
     app: financial-monitor
     component: api
 spec:
-  replicas: 3
+  replicas: 1   # SQLite supports single-writer only; use 1 replica
   selector:
     matchLabels:
       app: financial-monitor

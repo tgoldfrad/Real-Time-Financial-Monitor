@@ -41,3 +41,20 @@
   font-weight: 500;
   white-space: nowrap;
 }
+
+.loading {
+  text-align: center;
+  padding: 32px;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.error {
+  text-align: center;
+  padding: 16px;
+  color: #991b1b;
+  background: #fee2e2;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-top: 12px;
+}

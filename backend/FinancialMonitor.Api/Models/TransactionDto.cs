@@ -1,24 +1,16 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace FinancialMonitor.Api.Models;
 
-public class TransactionDto
+public record TransactionDto
 {
-    public string? TransactionId { get; set; }
+    public string? TransactionId { get; init; }
 
-    [Required]
-    [Range(0.01, double.MaxValue, ErrorMessage = "Amount must be greater than zero.")]
-    public decimal Amount { get; set; }
+    public decimal Amount { get; init; }
 
-    [Required]
-    [StringLength(3, MinimumLength = 3, ErrorMessage = "Currency must be a 3-letter ISO code.")]
-    public string Currency { get; set; } = string.Empty;
+    public string Currency { get; init; } = string.Empty;
 
-    [Required]
-    [EnumDataType(typeof(TransactionStatus), ErrorMessage = "Status must be Pending, Completed, or Failed.")]
-    public TransactionStatus Status { get; set; }
+    public TransactionStatus Status { get; init; }
 
-    public DateTimeOffset? Timestamp { get; set; }
+    public DateTimeOffset? Timestamp { get; init; }
 
     public Transaction ToDomain() => new()
     {
