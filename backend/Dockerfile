@@ -1,5 +1,5 @@
 # Build stage
-FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
 COPY FinancialMonitor.Api/FinancialMonitor.Api.csproj FinancialMonitor.Api/
@@ -8,8 +8,7 @@ RUN dotnet restore FinancialMonitor.Api/FinancialMonitor.Api.csproj
 COPY FinancialMonitor.Api/ FinancialMonitor.Api/
 RUN dotnet publish FinancialMonitor.Api/FinancialMonitor.Api.csproj \
     -c Release \
-    -o /app/publish \
-    --no-restore
+    -o /app/publish
 
 # Runtime stage — small Alpine-based image (~85 MB)
 FROM mcr.microsoft.com/dotnet/aspnet:9.0-alpine AS runtime

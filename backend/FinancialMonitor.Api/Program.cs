@@ -10,7 +10,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("http://localhost:5000");
+// In Docker, ASPNETCORE_URLS (http://+:5000) overrides this default
+builder.WebHost.UseUrls("http://0.0.0.0:5000");
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? "Data Source=financialmonitor.db;Cache=Shared";
